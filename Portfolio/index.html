@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caramel Hydra – Fortnite Creator & UGC Specialist</title>
+
+  <!-- Fortnite-style font -->
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Luckiest Guy', sans-serif;
+      background: linear-gradient(135deg, #2a003f, #0a0f3f);
+      color: #f5f5f5;
+      line-height: 1.7;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+    }
+
+    header {
+      background: linear-gradient(90deg, #8228ff, #2ecbff);
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    }
+
+    header img {
+      max-width: 120px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+    }
+
+    header h1 {
+      margin: 15px 0 5px;
+      font-size: 3em;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      margin-top: 15px;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 1.2em;
+      transition: color 0.3s ease;
+      letter-spacing: 1px;
+    }
+
+    nav a:hover {
+      color: #ffe066;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-size: 2.5em;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffe066;
+      text-shadow: 0px 0px 10px #ff33cc;
+      letter-spacing: 1px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+    }
+
+    /* --- PHOTO GRID --- */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      justify-items: center;
+      margin-top: 30px;
+    }
+
+    .photo-grid img {
+      width: 100%;
+      max-width: 280px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .photo-grid img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.7);
+    }
+
+    /* --- LIGHTBOX --- */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    }
+
+    .lightbox .close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 40px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .lightbox .close:hover {
+      color: #ff4081;
+    }
+
+    /* --- VIDEO GRID --- */
+    .video-embed {
+      text-align: left;
+      padding-left: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      padding: 20px 0 0 10px;
+    }
+
+    .video-card iframe {
+      width: 100%;
+      height: 160px;
+      border-radius: 15px;
+    }
+
+    .video-card p {
+      text-align: center;
+      margin-top: 8px;
+      font-size: 0.9em;
+    }
+
+    /* Responsive for tablets/phones */
+    @media (max-width: 1024px) {
+      .video-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    footer {
+      background: linear-gradient(90deg, #8228ff, #2ecbff);
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+      margin-top: 40px;
+      font-size: 0.9em;
+    }
+
+    .contact-list a {
+      color: #2ecbff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Caramel Hydra Logo" />
+    <h1>Caramel Hydra</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#ugc">UGC Work</a>
+      <a href="#contact">Contact</a>
+      <a href="#photos">Photos</a>
+      <a href="#videos">Videos</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="card">
+      <p>
+        I’m Caramel Hydra — a Fortnite content creator bringing wild energy, unique takes, and original videos to the community.  
+        From deep dives into the latest updates to hilarious level breakdowns, I’ve built a channel for players who love both the game and the culture.  
+        I also specialize in UGC (user-generated content), helping brands reach gamers with authentic, high-impact videos.
+      </p>
+    </div>
+  </section>
+
+  <section id="ugc">
+    <h2>UGC & Brand Collabs</h2>
+    <div class="card">
+      <p>
+        I create high-quality UGC for brands that want to connect with gamers.  
+        With experience as a <strong>Fortnite Partner</strong> and <strong>TikTok Partner</strong>,  
+        I know how to craft content that clicks with audiences.  
+      </p>
+      <ul>
+        <li>Fortnite Partner</li>
+        <li>TikTok Partner</li>
+        <li>Over 80M total views across platforms</li>
+      </ul>
+      <p>
+        Want to see more? Check out my highlight reel:  
+        <a href="https://linktr.ee/caramelhydra" target="_blank">linktr.ee/caramelhydra</a>
+      </p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="card">
+      <p>Let’s team up! Reach out for collaborations, brand deals, or creative projects:</p>
+      <div class="contact-list">
+        <p>Email: <a href="mailto:caramelmediagrp@gmail.com">caramelmediagrp@gmail.com</a></p>
+        <p>YouTube: <a href="https://www.youtube.com/@CaramelHydra" target="_blank">Caramel Hydra</a></p>
+        <p>Instagram: <a href="https://www.instagram.com/caramel_hydra" target="_blank">@caramel_hydra</a></p>
+        <p>TikTok: <a href="https://www.tiktok.com/@caramel_hydra" target="_blank">@caramel_hydra</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW PHOTOS SECTION -->
+  <section id="photos">
+    <h2>The Brands We Love</h2>
+    <div class="photo-grid">
+      <img src="photo1.jpg" alt="Photo 1">
+      <img src="photo2.jpg" alt="Photo 2">
+      <img src="photo3.jpg" alt="Photo 3">
+      <img src="photo4.jpg" alt="Photo 4">
+      <img src="photo5.jpg" alt="Photo 5">
+      <img src="photo6.jpg" alt="Photo 6">
+      <img src="photo7.jpg" alt="Photo 7">
+      <img src="photo8.jpg" alt="Photo 8">
+      <img src="photo9.jpg" alt="Photo 9">
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" src="" alt="Expanded view">
+  </div>
+
+  <!-- VIDEOS AT THE BOTTOM -->
+  <section id="videos" class="video-embed">
+    <h2>Top Videos</h2>
+    <div class="video-grid">
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/dVmWEAFInnA" title="Video 1" frameborder="0" allowfullscreen></iframe>
+        <p>#AD Capebara GO!</p>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/sklvbz_04rQ" title="Video 2" frameborder="0" allowfullscreen></iframe>
+        <p>#AD Marvel Rivals</p>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/d4AOAHRY_oQ" title="Video 3" frameborder="0" allowfullscreen></iframe>
+        <p>#AD Lightning Links Casino!</p>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/KL-BO0EERWc" title="Video 4" frameborder="0" allowfullscreen></iframe>
+        <p>#AD CS2 Skin Ape!</p>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/1iSpFRHqODU" title="Video 5" frameborder="0" allowfullscreen></iframe>
+        <p>#AD Marvel Rivals!</p>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/Lg6snTJ1kmo" title="Video 6" frameborder="0" allowfullscreen></iframe>
+        <p>#AD Uno Mobile!</p>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/Ul4mAUoDf00" title="Video 7" frameborder="0" allowfullscreen></iframe>
+        <p>#AD Reload Weapons!</p>
+      </div>
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/ymxbhSGAdNI" title="Video 8" frameborder="0" allowfullscreen></iframe>
+        <p>#AD Delta Force!</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Caramel Hydra.</p>
+  </footer>
+
+  <!-- Lightbox Script -->
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox .close');
+    const photos = document.querySelectorAll('.photo-grid img');
+
+    photos.forEach(photo => {
+      photo.addEventListener('click', () => {
+        lightbox.style.display = 'flex';
+        lightboxImg.src = photo.src;
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target !== lightboxImg) {
+        lightbox.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
